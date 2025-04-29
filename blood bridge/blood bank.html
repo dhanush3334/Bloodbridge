@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blood Bank Portal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url('blood-bank.jpg') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      color: white;
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    .container {
+      background-color: rgba(0, 0, 0, 0.6);
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px black;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      margin-top: 5px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      width: 100%;
+      background-color: crimson;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Blood Bank Portal</h1>
+  </header>
+
+  <div class="container">
+    <form id="bloodBankForm">
+      <label for="bankName">Blood Bank Name</label>
+      <input type="text" id="bankName" required>
+
+      <label for="available">Available Blood Types</label>
+      <input type="text" id="available" placeholder="e.g. A+, B-, O+">
+
+      <label for="outOfStock">Out of Stock Blood Types</label>
+      <input type="text" id="outOfStock" placeholder="e.g. AB-, O-">
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Blood Donation Website</p>
+  </footer>
+
+  <script>
+    document.getElementById('bloodBankForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const bankName = document.getElementById('bankName').value;
+      const available = document.getElementById('available').value;
+      const outOfStock = document.getElementById('outOfStock').value;
+
+      const bloodBankData = {
+        bankName,
+        available,
+        outOfStock
+      };
+
+      let bloodBanks = JSON.parse(localStorage.getItem('bloodBanks')) || [];
+      bloodBanks.push(bloodBankData);
+      localStorage.setItem('bloodBanks', JSON.stringify(bloodBanks));
+
+      alert("Blood Bank info saved successfully!");
+      window.location.href = "blood table.html"; // Redirect after saving
+    });
+  </script>
+
+</body>
+</html>
